@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faqja e internetit për Restaurant Brilant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0F2A20; --green-2:#16382B; --cream:#F6F0E2; --paper:#FFFDF7;
+  --gold:#C9A24B; --gold-light:#E0BC65; --gold-dark:#7A5C14;
+  --ink:#1B2A22; --muted:#4C5850; --line:#E3D8BC; --muted-on-green:#BFD0C6;
+  --serif:'Playfair Display',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;padding-bottom:110px}
+h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.15}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-dark)}
+
+/* header */
+header{background:var(--green);color:var(--cream);padding:48px 0 44px}
+header .eyebrow{color:var(--gold)}
+header h1{font-size:clamp(34px,6vw,58px);font-weight:700;margin:14px 0 14px}
+header p{margin:0;max-width:600px;font-size:18px;color:#CFDDD4}
+
+section{margin-top:56px}
+section>.wrap>h2{font-size:clamp(28px,4.5vw,38px);font-weight:700;margin:8px 0 8px}
+.lead{margin:0 0 26px;color:var(--muted);max-width:640px}
+
+/* packages */
+.packages{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;border:0;padding:0;margin:0}
+.pkg{position:relative;display:block;cursor:pointer}
+.pkg input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
+.pkg .card{height:100%;display:flex;flex-direction:column;gap:14px;background:var(--paper);border:2px solid var(--line);border-radius:6px;padding:26px 22px;transition:border-color .15s,box-shadow .15s}
+.pkg.dark .card{background:var(--green);color:var(--cream);border-color:var(--gold)}
+.pkg input:focus-visible+.card{outline:3px solid var(--gold-dark);outline-offset:3px}
+.pkg input:checked+.card{border-color:var(--gold-dark);box-shadow:0 0 0 3px var(--gold)}
+.pkg.dark input:checked+.card{border-color:var(--gold-light);box-shadow:0 0 0 3px var(--gold-light)}
+.pkg .top{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:24px}
+.step{font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark)}
+.pkg.dark .step{color:var(--gold-light)}
+.badge{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--gold);color:var(--green);padding:4px 9px;border-radius:3px}
+.pkg h3{font-size:28px}
+.price{font-family:var(--serif);font-size:44px;font-weight:700;color:var(--gold-dark);line-height:1}
+.pkg.dark .price{color:var(--gold-light)}
+.price small{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--muted);margin-left:6px}
+.pkg.dark .price small,.pkg.dark .tag{color:var(--muted-on-green)}
+.tag{margin:0;color:var(--muted);font-size:15px}
+.pkg ul{list-style:none;margin:0;padding:14px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px;font-size:14.5px}
+.pkg.dark ul{border-top-color:rgba(201,162,75,.6)}
+.pkg li{display:flex;gap:10px;align-items:flex-start}
+.pkg li svg{flex:0 0 18px;margin-top:2px;color:var(--gold-dark)}
+.pkg.dark li svg{color:var(--gold-light)}
+.pkg .time{margin-top:auto;padding-top:8px;font-size:14px;font-weight:600;color:var(--gold-dark)}
+.pkg.dark .time{color:var(--gold-light)}
+.pick{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--gold-dark)}
+.pkg.dark .pick{color:var(--gold-light)}
+.pick .dot{width:18px;height:18px;border-radius:50%;border:2px solid currentColor;display:inline-block;position:relative}
+.pkg input:checked+.card .pick .dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:currentColor}
+
+/* add-ons */
+.addons{border-top:2px solid var(--ink)}
+.addon{display:flex;align-items:center;gap:16px;padding:18px 4px;border-bottom:1px solid #D8CDAE;cursor:pointer}
+.addon input[type=checkbox]{width:26px;height:26px;flex:0 0 26px;accent-color:var(--gold-dark);margin:0;cursor:pointer}
+.addon .txt{flex:1 1 auto;min-width:0}
+.addon .name{font-size:17px;font-weight:600}
+.addon .desc{font-size:14.5px;color:var(--muted)}
+.addon .cost{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--gold-dark);white-space:nowrap;text-align:right}
+.addon.included{cursor:default;opacity:.75}
+.addon.included .cost{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--muted)}
+.addon.included input{cursor:not-allowed}
+.stepper{display:inline-flex;align-items:center;gap:0;margin-top:8px;border:2px solid var(--line);border-radius:6px;background:var(--paper)}
+.stepper button{width:44px;height:44px;border:0;background:transparent;font-size:22px;font-weight:600;color:var(--ink);cursor:pointer}
+.stepper button:focus-visible{outline:3px solid var(--gold-dark);outline-offset:-3px}
+.stepper output{min-width:36px;text-align:center;font-weight:600}
+
+/* costs and form */
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.box{background:var(--paper);border:2px solid var(--line);border-radius:6px;padding:26px 24px}
+.box h3{font-size:24px;margin-bottom:10px}
+.box p{margin:0 0 10px;color:var(--muted);font-size:15px}
+.row{display:flex;justify-content:space-between;gap:14px;padding:11px 0;border-top:1px solid var(--line);font-size:15.5px}
+.row b{color:var(--gold-dark);white-space:nowrap}
+.box ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.box li{display:flex;gap:10px}
+.box li svg{flex:0 0 18px;margin-top:2px;color:var(--gold-dark)}
+
+form{background:var(--paper);border:2px solid var(--line);border-radius:6px;padding:28px 24px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label.l{font-size:14px;font-weight:600}
+input[type=text],input[type=tel],input[type=email],textarea{font:inherit;font-size:16px;padding:12px 14px;border:2px solid #CFC4A4;border-radius:6px;background:#fff;color:var(--ink);width:100%}
+textarea{min-height:110px;resize:vertical}
+input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold-dark);outline-offset:1px;border-color:var(--gold-dark)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.summary{grid-column:1/-1;background:var(--cream);border:1px dashed var(--gold-dark);border-radius:6px;padding:16px 18px;font-size:15px}
+.summary b{display:block;margin-bottom:6px}
+.summary ul{margin:0;padding-left:18px}
+.msg{grid-column:1/-1;font-size:15px;font-weight:600}
+.msg.err{color:#9B1C1C}
+.btn{font:inherit;font-weight:700;font-size:17px;background:var(--green);color:var(--cream);border:2px solid var(--green);border-radius:6px;padding:14px 26px;cursor:pointer;min-height:48px}
+.btn:hover{background:var(--green-2)}
+.btn:focus-visible{outline:3px solid var(--gold-dark);outline-offset:3px}
+.btn[disabled]{opacity:.6;cursor:wait}
+.thanks{display:none;background:var(--green);color:var(--cream);border-radius:6px;padding:34px 28px}
+.thanks h3{font-size:30px;margin-bottom:10px;color:var(--gold-light)}
+.thanks p{margin:0;color:#CFDDD4}
+
+/* sticky total */
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--green);color:var(--cream);border-top:3px solid var(--gold);z-index:10}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 20px}
+.bar .lbl{font-size:13px;color:var(--muted-on-green)}
+.bar .tot{font-family:var(--serif);font-size:32px;font-weight:700;color:var(--gold-light);line-height:1.1}
+.bar a{font-weight:700;background:var(--gold);color:var(--green);text-decoration:none;padding:13px 22px;border-radius:6px;white-space:nowrap}
+.bar a:focus-visible{outline:3px solid var(--cream);outline-offset:3px}
+
+footer{margin-top:56px;color:var(--muted);font-size:14px}
+
+@media (max-width:860px){
+  .packages{grid-template-columns:1fr}
+  .two{grid-template-columns:1fr}
+  form{grid-template-columns:1fr;padding:22px 18px}
+  .addon{align-items:flex-start}
+  .addon .cost{font-size:19px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--gold)">Faqja e internetit</div>
+    <h1>Restaurant Brilant</h1>
+    <p>Zgjidhni paketën, shtoni vetëm atë që ju duhet, dhe shihni çmimin përfundimtar menjëherë. Në fund e dërgoni kërkesën me një buton.</p>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Hapi 1</div>
+    <h2>Zgjidhni paketën</h2>
+    <p class="lead">Mund të filloni me paketën më të thjeshtë dhe ta përmirësoni më vonë.</p>
+    <fieldset class="packages" id="packages" style="border:0;padding:0;margin:0">
+      <legend style="position:absolute;left:-9999px">Paketat</legend>
+    </fieldset>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Hapi 2</div>
+    <h2>Shtoni atë që ju duhet</h2>
+    <p class="lead">Shtesat që janë tashmë pjesë e paketës së zgjedhur shfaqen si të përfshira.</p>
+    <div class="addons" id="addons"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap two">
+    <div class="box">
+      <h3>Shpenzime vjetore</h3>
+      <p>Këto nuk janë pjesë e çmimit të paketës. Faqja i ka çdo vit.</p>
+      <div class="row"><span>Domeni (adresa e faqes)</span><b>rreth €15–25</b></div>
+      <div class="row"><span>Hostimi</span><b>rreth €60–120</b></div>
+      <div class="row"><span>Mirëmbajtje mujore (opsionale)</span><b>€30 / muaj</b></div>
+    </div>
+    <div class="box">
+      <h3>Si funksionon</h3>
+      <ul id="terms"></ul>
+    </div>
+  </div>
+</section>
+
+<section id="send">
+  <div class="wrap">
+    <div class="eyebrow">Hapi 3</div>
+    <h2>Dërgoni kërkesën</h2>
+    <p class="lead">Kjo nuk është porosi përfundimtare. Do t'ju kontaktojmë për të konfirmuar çdo detaj përpara se të fillojë puna.</p>
+
+    <form id="form" novalidate>
+      <div class="field"><label class="l" for="name">Emri dhe mbiemri *</label><input type="text" id="name" name="name" autocomplete="name" required></div>
+      <div class="field"><label class="l" for="phone">Telefoni</label><input type="tel" id="phone" name="phone" autocomplete="tel"></div>
+      <div class="field"><label class="l" for="email">Emaili</label><input type="email" id="email" name="email" autocomplete="email"></div>
+      <div class="field"><label class="l" for="role">Pozita në Brilant</label><input type="text" id="role" name="role" placeholder="p.sh. pronar, menaxher"></div>
+      <div class="field full"><label class="l" for="note">Dëshira ose pyetje të tjera</label><textarea id="note" name="note" placeholder="Shkruani çdo gjë që duhet ta dimë"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>Mos e plotësoni <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label></div>
+      <div class="summary" id="summary" aria-live="polite"></div>
+      <div class="msg" id="msg" role="status"></div>
+      <div class="field full"><button class="btn" id="submit" type="submit">Dërgo kërkesën</button></div>
+    </form>
+
+    <div class="thanks" id="thanks" role="status">
+      <h3>Faleminderit!</h3>
+      <p>Kërkesa u dërgua. Do t'ju kontaktojmë së shpejti.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="wrap"><footer>Çmimet janë në euro dhe janë ofertë indikative deri në konfirmimin përfundimtar.</footer></div>
+
+<div class="bar">
+  <div class="wrap">
+    <div><div class="lbl">Çmimi total (një herë)</div><div class="tot" id="total">€0</div></div>
+    <a href="#send">Dërgo kërkesën</a>
+  </div>
+</div>
+
+<script>
+/* ========= CONFIGURE BEFORE PUBLISHING =========
+   1) ENDPOINT: create a free form at formspree.io, set its email to the
+      address that should receive requests, and paste the form URL here.
+      Example: "https://formspree.io/f/abcdwxyz"
+   2) EMAIL: used only as a fallback (opens the client's email app) when
+      ENDPOINT is empty or the send fails. */
+var CONFIG = {
+  ENDPOINT: "https://formsubmit.co/ajax/ledionvranja2010@gmail.com",
+  EMAIL: "ledionvranja2010@gmail.com",
+  SUBJECT: "Kërkesë për faqen e internetit - Restaurant Brilant"
+};
+
+var CHECK = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5l3.5 3.5 7.5-8"/></svg>';
+
+var PACKAGES = [
+  { id:"vitrine", step:"Paketa 1", name:"Vitrinë", price:1*350, dark:false,
+    tag:"Faqe e bukur me foto dhe tekste, që klientët t'ju gjejnë dhe t'ju njohin.", time:"5–7 ditë",
+    features:["Deri në 4 faqe: Ballina, Rreth nesh, Galeria, Kontakti","Galeri me fotot e ushqimit dhe të ambienteve","Menuja e shfaqur si foto ose PDF","Orari i punës, harta dhe numrat e telefonit","Butona për thirrje dhe WhatsApp","Lidhje me Instagram, Facebook dhe Wolt","Duket mirë në telefon, tablet dhe kompjuter"],
+    includes:[] },
+  { id:"rezervime", step:"Paketa 2", name:"Rezervime", price:650, dark:true, featured:true,
+    tag:"Gjithçka nga Vitrina, plus rezervime online për tavolina dhe evente.", time:"10–14 ditë",
+    features:["Gjithçka nga paketa Vitrinë","Formular rezervimi me datë, orë dhe numër personash","Njoftim me email për restorantin për çdo rezervim","Email konfirmimi për klientin","Panel administrimi: pranoni, refuzoni ose ndryshoni rezervimet","Kufizim i vendeve sipas ditës dhe orës","Formular i veçantë për dasma dhe evente në sallë"],
+    includes:["event"] },
+  { id:"premium", step:"Paketa 3", name:"Premium", price:1150, dark:false,
+    tag:"Sistemi i plotë për restorantin, 7 villat dhe 12 dhomat e hotelit.", time:"3–4 javë",
+    features:["Gjithçka nga paketa Rezervime","Rezervim online për dhomat dhe villat, me kalendar disponueshmërie","Menu digjitale që e ndryshoni vetë nga paneli, me QR kod për tavolinat","Faqja në 3 gjuhë: shqip, anglisht, gjermanisht","Optimizim për Google dhe Google Business","Statistika të vizitorëve","Trajnim 1 orë për stafin dhe 30 ditë mbështetje falas"],
+    includes:["event","menu","rooms","lang","seo"] }
+];
+
+var ADDONS = [
+  { id:"lang",  name:"Gjuhë shtesë", desc:"Anglisht ose gjermanisht, me përkthim të të gjitha faqeve. Çmimi është për një gjuhë.", price:120 },
+  { id:"menu",  name:"Menu digjitale me panel dhe QR kod", desc:"Ndryshoni vetë çmimet, fotot dhe kategoritë e ushqimeve pa na thirrur.", price:200 },
+  { id:"rooms", name:"Rezervim online për dhoma dhe villa", desc:"Kalendar disponueshmërie për 12 dhomat dhe 7 villat, me kërkesa që i pranoni nga paneli.", price:400 },
+  { id:"event", name:"Formular për dasma dhe evente", desc:"Klienti zgjedh datën dhe numrin e të ftuarve dhe ju merrni kërkesën me email.", price:100 },
+  { id:"deposit", name:"Depozitë online për rezervime", desc:"Klienti paguan një paradhënie me kartë gjatë rezervimit. Varet nga ofruesi i pagesave.", price:300 },
+  { id:"order", name:"Porosi online direkt nga faqja", desc:"Klientët porosisin ushqim për marrje ose dërgesë pa kaluar nga platforma të tjera.", price:600 },
+  { id:"voucher", name:"Kuponë dhuratë", desc:"Klientët blejnë kuponë dhuratë për restorantin ose për qëndrim në hotel.", price:150 },
+  { id:"seo",   name:"SEO dhe Google Business", desc:"Faqja del më lart kur njerëzit kërkojnë restorant ose hotel në zonën tuaj.", price:150 },
+  { id:"mail",  name:"Listë emailesh dhe newsletter", desc:"Mblidhni emailet e klientëve dhe dërgojini ofertat dhe eventet e reja.", price:100 },
+  { id:"pages", name:"Faqe shtesë", desc:"Oferta, lajme, galeri të veçanta ose çdo faqe tjetër që ju duhet.", price:60, qty:true }
+];
+
+var TERMS = [
+  "Paguhet 50% në fillim dhe 50% kur faqja dorëzohet.",
+  "Dy raunde ndryshimesh janë të përfshira në çdo paketë.",
+  "Fotot dhe tekstet i jepni ju. Ne i rregullojmë dhe i vendosim.",
+  "Mund të filloni me një paketë dhe ta përmirësoni më vonë."
+];
+
+var state = { pkg:"rezervime", picked:{}, pages:0 };
+
+function euro(n){ return "€" + n.toLocaleString("en-US"); }
+function pkgById(id){ return PACKAGES.filter(function(p){return p.id===id;})[0]; }
+
+function renderPackages(){
+  var box = document.getElementById("packages");
+  var html = box.querySelector("legend").outerHTML;
+  PACKAGES.forEach(function(p){
+    html += '<label class="pkg'+(p.dark?' dark':'')+'">'+
+      '<input type="radio" name="pkg" value="'+p.id+'"'+(state.pkg===p.id?' checked':'')+'>'+
+      '<div class="card">'+
+        '<div class="top"><span class="step">'+p.step+'</span>'+(p.featured?'<span class="badge">Më e kërkuara</span>':'')+'</div>'+
+        '<h3>'+p.name+'</h3>'+
+        '<div class="price">'+euro(p.price)+'<small>një herë</small></div>'+
+        '<p class="tag">'+p.tag+'</p>'+
+        '<ul>'+p.features.map(function(f){return '<li>'+CHECK+'<span>'+f+'</span></li>';}).join('')+'</ul>'+
+        '<div class="time">Koha e punës: '+p.time+'</div>'+
+        '<div class="pick"><span class="dot"></span>Zgjidh këtë paketë</div>'+
+      '</div></label>';
+  });
+  box.innerHTML = html;
+  box.addEventListener("change", function(e){
+    if(e.target && e.target.name==="pkg"){ state.pkg = e.target.value; renderAddons(); update(); }
+  });
+}
+
+function renderAddons(){
+  var inc = pkgById(state.pkg).includes;
+  var box = document.getElementById("addons");
+  var html = "";
+  ADDONS.forEach(function(a){
+    var included = inc.indexOf(a.id) > -1;
+    if(included){ delete state.picked[a.id]; }
+    var checked = included || !!state.picked[a.id] || (a.qty && state.pages>0);
+    html += '<div class="addon'+(included?' included':'')+'" data-id="'+a.id+'">'+
+      (a.qty ? '' : '<input type="checkbox" id="ad-'+a.id+'" data-id="'+a.id+'"'+(checked?' checked':'')+(included?' disabled':'')+' aria-labelledby="nm-'+a.id+'">')+
+      '<div class="txt"><div class="name" id="nm-'+a.id+'">'+a.name+'</div><div class="desc">'+a.desc+'</div>'+
+      (a.qty ? '<div class="stepper" role="group" aria-label="Numri i faqeve shtesë"><button type="button" data-step="-1" aria-label="Më pak">−</button><output id="pagesOut" aria-live="polite">'+state.pages+'</output><button type="button" data-step="1" aria-label="Më shumë">+</button></div>' : '')+
+      '</div>'+
+      '<div class="cost">'+(included?'Përfshirë':(a.qty?euro(a.price)+' / faqe':euro(a.price)))+'</div>'+
+    '</div>';
+  });
+  box.innerHTML = html;
+}
+
+function wireAddons(){
+  var box = document.getElementById("addons");
+  box.addEventListener("change", function(e){
+    var id = e.target && e.target.getAttribute("data-id");
+    if(id && e.target.type==="checkbox"){ if(e.target.checked){ state.picked[id]=true; } else { delete state.picked[id]; } update(); }
+  });
+  box.addEventListener("click", function(e){
+    var b = e.target.closest("button[data-step]");
+    if(b){
+      state.pages = Math.max(0, Math.min(20, state.pages + parseInt(b.getAttribute("data-step"),10)));
+      document.getElementById("pagesOut").textContent = state.pages; update(); return;
+    }
+    var row = e.target.closest(".addon");
+    if(row && !row.classList.contains("included") && !e.target.closest(".stepper") && e.target.tagName!=="INPUT"){
+      var cb = row.querySelector('input[type=checkbox]');
+      if(cb){ cb.checked = !cb.checked; cb.dispatchEvent(new Event("change",{bubbles:true})); }
+    }
+  });
+}
+
+function selection(){
+  var p = pkgById(state.pkg), inc = p.includes, items = [], total = p.price;
+  ADDONS.forEach(function(a){
+    if(a.qty){ if(state.pages>0){ items.push({name:a.name+" x"+state.pages, price:a.price*state.pages}); total += a.price*state.pages; } return; }
+    if(state.picked[a.id] && inc.indexOf(a.id)===-1){ items.push({name:a.name, price:a.price}); total += a.price; }
+  });
+  return { pkg:p, items:items, total:total };
+}
+
+function update(){
+  var s = selection();
+  document.getElementById("total").textContent = euro(s.total);
+  var h = '<b>Kërkesa juaj</b><ul><li>Paketa '+s.pkg.name+': '+euro(s.pkg.price)+'</li>';
+  s.items.forEach(function(i){ h += '<li>'+i.name+': '+euro(i.price)+'</li>'; });
+  h += '</ul><div style="margin-top:8px"><b style="display:inline">Total: '+euro(s.total)+'</b> (një herë, pa shpenzimet vjetore)</div>';
+  document.getElementById("summary").innerHTML = h;
+}
+
+function buildMessage(f){
+  var s = selection(), L = [];
+  L.push("KËRKESË PËR FAQE INTERNETI - RESTAURANT BRILANT","");
+  L.push("Paketa: "+s.pkg.name+" ("+euro(s.pkg.price)+")");
+  L.push("Shtesa:"); if(!s.items.length){ L.push("  (asnjë)"); } s.items.forEach(function(i){ L.push("  - "+i.name+": "+euro(i.price)); });
+  L.push("","TOTAL (një herë): "+euro(s.total),"Shpenzimet vjetore (domeni, hostimi) nuk janë përfshirë.","");
+  L.push("Emri: "+f.name,"Telefoni: "+(f.phone||"-"),"Emaili: "+(f.email||"-"),"Pozita: "+(f.role||"-"),"","Shënime:",(f.note||"-"));
+  return L.join("\n");
+}
+
+function setMsg(t, err){ var m=document.getElementById("msg"); m.textContent=t||""; m.className="msg"+(err?" err":""); }
+
+function mailtoFallback(msg){
+  if(!CONFIG.EMAIL){ setMsg("Dërgimi nuk është konfiguruar ende. Kopjoni kërkesën dhe na e dërgoni me email ose WhatsApp.", true); return false; }
+  location.href = "mailto:"+CONFIG.EMAIL+"?subject="+encodeURIComponent(CONFIG.SUBJECT)+"&body="+encodeURIComponent(msg);
+  return true;
+}
+
+function done(){
+  document.getElementById("form").style.display="none";
+  var t=document.getElementById("thanks"); t.style.display="block"; t.scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault(); setMsg("");
+  var fd = new FormData(e.target);
+  if(fd.get("_gotcha")){ return; }
+  var f = { name:(fd.get("name")||"").trim(), phone:(fd.get("phone")||"").trim(), email:(fd.get("email")||"").trim(), role:(fd.get("role")||"").trim(), note:(fd.get("note")||"").trim() };
+  if(!f.name){ setMsg("Ju lutem shkruani emrin tuaj.", true); document.getElementById("name").focus(); return; }
+  if(!f.phone && !f.email){ setMsg("Ju lutem shkruani telefonin ose emailin, që t'ju kontaktojmë.", true); document.getElementById("phone").focus(); return; }
+  var msg = buildMessage(f), btn = document.getElementById("submit");
+  if(!CONFIG.ENDPOINT){ if(mailtoFallback(msg)){ setMsg("Po hapet aplikacioni i emailit. Shtypni Dërgo aty për ta përfunduar."); } return; }
+  btn.disabled = true; btn.textContent = "Po dërgohet...";
+  var body = { name:f.name, phone:f.phone, message:msg, _subject:CONFIG.SUBJECT, _captcha:"false", _template:"box" };
+  if(f.email){ body.email = f.email; }
+  fetch(CONFIG.ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(body) })
+    .then(function(r){ if(!r.ok){ throw new Error("send"); } done(); })
+    .catch(function(){
+      btn.disabled=false; btn.textContent="Dërgo kërkesën";
+      if(!mailtoFallback(msg)){ return; }
+      setMsg("Dërgimi automatik nuk funksionoi, prandaj po hapet emaili juaj.", true);
+    });
+});
+
+document.getElementById("terms").innerHTML = TERMS.map(function(t){ return '<li>'+CHECK+'<span>'+t+'</span></li>'; }).join("");
+renderPackages(); renderAddons(); wireAddons(); update();
+</script>
+</body>
+</html>
