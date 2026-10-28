@@ -381,10 +381,13 @@ document.getElementById("form").addEventListener("submit", function(e){
   btn.disabled = true; btn.textContent = "Po dërgohet...";
   var body = { name:f.name, phone:f.phone, message:msg, _subject:CONFIG.SUBJECT, _captcha:"false", _template:"box" };
   if(f.email){ body.email = f.email; }
-  fetch(CONFIG.ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(body) })
+  var ctl = (window.AbortController ? new AbortController() : null);
+  var timer = setTimeout(function(){ if(ctl){ ctl.abort(); } }, 15000);
+  fetch(CONFIG.ENDPOINT, { method:"POST", headers:{ "Content-Type":"application/json", "Accept":"application/json" }, body:JSON.stringify(body), signal: ctl ? ctl.signal : undefined })
     .then(function(r){ if(!r.ok){ throw new Error("send"); } return r.json(); })
-    .then(function(j){ if(!j || j.success===false || j.success==="false"){ throw new Error("send"); } done(); })
+    .then(function(j){ if(!j || j.success===false || j.success==="false"){ throw new Error("send"); } clearTimeout(timer); done(); })
     .catch(function(){
+      clearTimeout(timer);
       btn.disabled=false; btn.textContent="Dërgo kërkesën";
       if(!mailtoFallback(msg)){ return; }
       setMsg("Dërgimi automatik nuk funksionoi, prandaj po hapet emaili juaj.", true);
